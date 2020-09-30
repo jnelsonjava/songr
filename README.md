@@ -8,7 +8,15 @@ To run the app, clone the [Github repository](https://github.com/jnelsonjava/son
 
 `git clone https://github.com/jnelsonjava/songr.git`
 
-Change into your *songr* directory. From there you can run the app with the following command:
+You'll need to create a postgresql database named "songr" and create a connection. To make the connection, navigate to the `src/main/resources/application.properties` file. Replace `<username>` and `<password>` with the postgres username and password for your local database. Example:
+
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/songr
+spring.datasource.username=yourPostgresUserNameHere
+spring.datasource.password=yourPostgresPasswordHere
+```
+
+In your terminal, nagivate into the *songr* directory. From there you can run the app with the following command:
 
 `./gradle bootRun`
 
