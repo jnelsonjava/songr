@@ -17,10 +17,31 @@ main {
   width: 600px;
   margin: auto;
   background-color: #90a692;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 footer {
   width: 600px;
   margin: auto;
   background-color: #5c7b73;
+}
+
+.albumCard, .songCard {
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: #bbb6b2;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.albumCard img {
+    max-width: 90%
+}
+
+.albumCard ol {
+    text-align: left;
 }

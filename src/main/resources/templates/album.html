@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <main>
+        <form action="/albums" method="GET">
+            <input type="submit" value="Back to Album List">
+        </form>
+        <div class="albumCard">
+            <!--            reference for adding images https://stackoverflow.com/questions/29460618/inserting-an-image-from-local-directory-in-thymeleaf-spring-framework-with-mave-->
+            <img th:src="${album.imageUrl}" alt="test">
+            <p th:text="${album.title}">title</p>
+            <p th:text="'by ' + ${album.artist}">artist</p>
+            <p th:text="'songs: ' + ${album.getSongs().size()}">song count</p>
+            <p th:text="'length: ' + ${album.length / 60}">length</p>
+            <h3>songs:</h3>
+            <ol>
+                <li th:each="song : ${album.getSongs()}" th:text="${song.title}"></li>
+            </ol>
+            <form action="/song" method="POST">-->
+                <legend>Add a song to this album</legend>
+                <input type="hidden" name="albumId" th:value="${album.id}">
+                Title: <input type="text" name="title">
+                Length (seconds): <input type="number" name="length">
+                Track Number: <input type="number" name="trackNumber">
+                <input type="submit" value="Add Song">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -6,36 +6,62 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+
 </head>
 <body>
-<form action="/albums" method="POST">
-    Title: <input type="text" name="title">
-    Artist: <input type="text" name="artist">
-    # of Songs: <input type="number" name="songCount">
-    Album Length (mins): <input type="number" name="length">
-    Link to Cover Art: <input type="text" name="imageUrl">
+    <main>
+        <form action="/albums" method="POST">
+            <legend>Add New Album</legend>
+            Title: <input type="text" name="title">
+            Artist: <input type="text" name="artist">
+            # of Songs: <input type="number" name="songCount">
+            Album Length (mins): <input type="number" name="length">
+            Link to Cover Art: <input type="text" name="imageUrl">
 
-    <input type="submit">
-</form>
+            <input type="submit">
+        </form>
 
-<!--  referenced for a reminder on table structure https://www.w3schools.com/html/html_tables.asp  -->
-    <table>
-        <tr>
-            <th>Album</th>
-            <th>Artist</th>
-            <th>Song Count</th>
-            <th>Length (mins)</th>
-            <th>Cover</th>
-        </tr>
-        <tr th:each="album : ${albums}">
-            <td th:text="${album.title}">title</td>
-            <td th:text="${album.artist}">artist</td>
-            <td th:text="${album.songCount}">song count</td>
-            <td th:text="${album.length / 60}">length</td>
-<!--            reference for adding images https://stackoverflow.com/questions/29460618/inserting-an-image-from-local-directory-in-thymeleaf-spring-framework-with-mave-->
-            <td><img th:src="${album.imageUrl}" alt="test"> </td>
+        <form action="/songs" method="GET">
+            <input type="submit" value="Song List">
+        </form>
 
-        </tr>
-    </table>
+        <div class="albumCard" th:each="album : ${albums}">
+            <!--            reference for adding images https://stackoverflow.com/questions/29460618/inserting-an-image-from-local-directory-in-thymeleaf-spring-framework-with-mave-->
+            <img th:src="${album.imageUrl}" alt="test">
+            <p th:text="${album.title}">title</p>
+            <p th:text="'by ' + ${album.artist}">artist</p>
+            <form action="/album" method="GET">
+                <input type="hidden" name="albumId" th:value="${album.id}">
+                <input type="submit" value="Album Details">
+            </form>
+        </div>
+    </main>
+    <!--  referenced for a reminder on table structure https://www.w3schools.com/html/html_tables.asp  -->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <th>Album</th>-->
+<!--            <th>Artist</th>-->
+<!--            <th>Song Count</th>-->
+<!--            <th>Length (mins)</th>-->
+<!--            <th>Cover</th>-->
+<!--            <th>Song Input Form</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="album : ${albums}">-->
+<!--            <td th:text="${album.title}">title</td>-->
+<!--            <td th:text="${album.artist}">artist</td>-->
+<!--&lt;!&ndash;            reference for adding images https://stackoverflow.com/questions/29460618/inserting-an-image-from-local-directory-in-thymeleaf-spring-framework-with-mave&ndash;&gt;-->
+<!--            <td><img th:src="${album.imageUrl}" alt="test"> </td>-->
+<!--            <td>-->
+<!--                <form action="/song" method="POST">-->
+<!--                    <input type="hidden" name="albumId" th:value="${album.id}">-->
+<!--                    Title: <input type="text" name="title">-->
+<!--                    Length (seconds): <input type="number" name="length">-->
+<!--                    Track Number: <input type="number" name="trackNumber">-->
+<!--                    <input type="submit">-->
+<!--                </form>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
 </body>
 </html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+    <main>
+        <div class="songCard" th:each="song : ${songs}">
+            <p th:text="${song.title}"></p>
+            <p th:text="'by ' + ${song.album.artist}"></p>
+            <p th:text="'Album: ' + ${song.album.title}"></p>
+            <p th:text="'track ' + ${song.trackNumber}"></p>
+            <p th:text="'length ' + ${song.length} + ' seconds'"></p>
+            <form action="/album" method="GET">
+                <input type="hidden" name="albumId" th:value="${song.album.getId()}">
+                <input type="submit" value="Go to album">
+            </form>
+        </div>
+    </main>
+</body>
+</html>

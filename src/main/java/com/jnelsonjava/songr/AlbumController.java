@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
@@ -14,12 +15,16 @@ public class AlbumController {
     @Autowired
     public AlbumRepository albumRepository;
 
+    @Autowired
+    public SongRepository songRepository;
+
     @PostMapping("/albums")
     public RedirectView postAlbums(String title, String artist, int songCount, int length, String imageUrl) {
-
         Album newAlbum = new Album(title, artist, songCount, length * 60, imageUrl);
-
         albumRepository.save(newAlbum);
+
+//        Song newSong = new Song("panda song", 240, 1, newAlbum);
+//        songRepository.save(newSong);
 
         return new RedirectView("/albums");
     }
@@ -53,5 +58,12 @@ public class AlbumController {
         mAlbums.addAttribute("albums", albums);
 
         return "albums";
+    }
+
+    @GetMapping("/album")
+    public String showAlbum(Model mAlbum, @RequestParam("albumId") long albumId) {
+        Album album = albumRepository.getOne(albumId);
+        mAlbum.addAttribute("album", album);
+        return "album";
     }
 }
