@@ -2,6 +2,10 @@
 
 A Spring app with Thymeleaf views
 
+## Attributions
+
+    - Chandler Puckett for card structure
+
 ## Running the App
 
 To run the app, clone the [Github repository](https://github.com/jnelsonjava/songr) using the following command:
@@ -16,7 +20,7 @@ spring.datasource.username=yourPostgresUserNameHere
 spring.datasource.password=yourPostgresPasswordHere
 ```
 
-In your terminal, nagivate into the *songr* directory. From there you can run the app with the following command:
+In your terminal, navigate into the *songr* directory. From there you can run the app with the following command:
 
 `./gradle bootRun`
 

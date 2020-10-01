@@ -1,9 +1,8 @@
 package com.jnelsonjava.songr;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -18,6 +17,11 @@ public class Album {
     int length; // represents album length in seconds
     String imageUrl;
 
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Song> songs = new ArrayList<Song>();
+
+    public Album() {}
+
     public Album(String title, String artist, int songCount, int length, String imageUrl) {
         this.title = title;
         this.artist = artist;
@@ -25,8 +29,6 @@ public class Album {
         this.length = length;
         this.imageUrl = imageUrl;
     }
-
-    public Album() {}
 
     @Override
     public String toString() {
@@ -77,5 +79,13 @@ public class Album {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
     }
 }
